@@ -7,22 +7,18 @@ dotenv.config({
 });
 
 const ENVIRONMENT = process.env.NODE_ENV || 'development';
-
-const MONGO_USERNAME = process.env.MONGO_USERNAME ?? '';
-const MONGO_PASSWORD = process.env.MONGO_PASSWORD ?? '';
-const MONGO_HOST = process.env.MONGO_HOST ?? '';
-const MONGO_PORT = process.env.MONGO_PORT ?? '';
-const MONGO_DATABASE = process.env.MONGO_DATABASE ?? '';
+const BREWERY_API_URL = process.env.BREWERY_API_URL ?? 'http://localhost:5089';
 const PORT = process.env.PORT ?? '3000';
 
-const MONGO_URL = MONGO_USERNAME && MONGO_PASSWORD
-  ? `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`
-  : `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`;
 
-export const config = { 
+export interface Config {
+  environment: string;
+  breweryApiUrl: string;
+  port: number;
+}
+
+export const config: Config = {
   environment: ENVIRONMENT,
-  mongo: {
-    url: MONGO_URL
-  },
-  port: parseInt(PORT, 10) // convert PORT to number for use in server setup
+  breweryApiUrl: BREWERY_API_URL,
+  port: parseInt(PORT, 10),
 };

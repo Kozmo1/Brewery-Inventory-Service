@@ -5,7 +5,7 @@ import { InventoryController } from '../../../controllers/inventoryController'; 
 const router = express.Router();
 const inventoryController = new InventoryController();
 
-router.post('/inventory/add-product',
+router.post('/add-product',
     body('name').notEmpty().withMessage('A Name is required'),
     body('type').isIn(['Beer', 'Cocktail', 'Liqueur', 'Hard Seltzer']).withMessage('Invalid product type'),
     body('description').notEmpty().withMessage('A description is required'),
@@ -21,19 +21,19 @@ router.post('/inventory/add-product',
     (req: Request, res: Response, next: NextFunction) => inventoryController.addProduct(req, res, next)
 );
 
-router.get('/inventory/:id', 
+router.get('/:id', 
     (req: Request, res: Response, next: NextFunction) => inventoryController.getProductById(req, res, next)
 );
 
-router.put('/inventory/:id', 
+router.put('/:id', 
     (req: Request, res: Response, next: NextFunction) => inventoryController.updateProduct(req, res, next)
 );
 
-router.delete('/inventory/:id', 
+router.delete('/:id', 
     (req: Request, res: Response, next: NextFunction) => inventoryController.deleteProduct(req, res, next)
 );
 
-router.get('/inventory', 
+router.get('/', 
     (req: Request, res: Response, next: NextFunction) => inventoryController.getAllProducts(req, res, next)
 );
 
