@@ -37,11 +37,8 @@ router.post(
 		inventoryController.addProduct(req, res, next)
 );
 
-router.get(
-	"/:id",
-	verifyToken,
-	(req: Request, res: Response, next: NextFunction) =>
-		inventoryController.getProductById(req, res, next)
+router.get("/:id", (req: Request, res: Response, next: NextFunction) =>
+	inventoryController.getProductById(req, res, next)
 );
 
 router.put(
@@ -70,10 +67,4 @@ router.put(
 		inventoryController.updateStock(req, res, next)
 );
 
-router.get(
-	"/low-stock",
-	verifyToken,
-	(req: AuthRequest, res: Response, next: NextFunction) =>
-		inventoryController.getLowStock(req, res, next)
-);
 export = router;
